@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Systems Price Calculator</title>
+  <meta name="description" content="Conveniently calculate the total costs for your digital systems components">
+  <meta name="keywords" content="Calculator, Digital Systems, Price Calculator, Components">
+  <meta property="og:title" content="Digital Systems Price Calculator">
+  <meta property="og:url" content="file:///C:/Calculator/index.html">
+  <meta property="og:image" content="https://i.pinimg.com/564x/d1/72/aa/d172aafcd40ad7910e34bb5788a80107.jpg">
+  <meta property="og:description" content="User-friendly tool to calculate the total costs for your digital systems components">
+</head>
+<style>
+  body {
+    font-family: Candara;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  input {
+    font-family: Candara;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .styled-table tbody tr:last-child {
+    background-color: transparent;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    padding: 20px 30px;
+    text-align: center;
+  }
+
+  .styled-table thead tr th:first-child {
+    border-top-left-radius: 10px;
+  }
+
+  .styled-table thead tr th:last-child {
+    border-top-right-radius: 10px;
+  }
+
+  .styled-table tbody tr {
+    background-color: #f3f3f3;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    background:transparent;
+    text-align: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .button {
+    border: 4px white solid;
+    outline: 0;
+    cursor: pointer;
+    color: white;
+    background-color: #009879;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+    font-size:xx-large;
+    }
+
+  .button:hover {
+    background-color: #007a5e;
+    transform: scale(1.1);
+  }
+                
+  .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dadada;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+  width: 100%;
+  max-width: 800px;
+}
+
+  .button-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+  }
+
+  .button-info {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      width: 100%;
+  }
+
+  .control-btn {
+    border: none;
+    color: #009879;
+    font-size: 2em;
+    cursor: pointer;
+    background-color: transparent;
+    transition: transform 0.3s;
+  }
+
+  .control-btn:hover {
+    transform: scale(1.5);
+  }
+
+  .amount{
+    display:flex;
+    flex-direction: row;
+  }
+
+  i{
+    width: 70%;
+    color: red;
+  }
+  .invalid-input {
+    color: red;
+  }
+</style>
+<body>
+<div class="wrapper">
+  <div class="container">
+    <h1>Calculator</h1>
+    <table class="styled-table" id="costTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Price (EUR)</th>
+          <th>Amount</th>
+          <th>Cost (EUR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>CPU (Core)</th>
+          <td class="price" id="cpuPrice">10</td>
+          <td class="amount">
+            <button class="control-btn" onclick="adjustAmount('cpu', -1)">-</button>
+            <input type="number" id="cpuAmount" min="0" max="20" placeholder="Amount" />
+            <button class="control-btn" onclick="adjustAmount('cpu', 1)">+</button>
+          </td>
+          <td><span id="cpuCost"></span></td>
+        </tr>
+        <tr>
+          <th>RAM (GB)</th>
+          <td class="price" id="ramPrice">10</td>
+          <td class="amount">
+            <button class="control-btn" onclick="adjustAmount('ram', -1)">-</button>
+            <input type="number" id="ramAmount" min="0" max="64" placeholder="Amount" />
+            <button class="control-btn" onclick="adjustAmount('ram', 1)">+</button>
+          </td>
+          <td><span id="ramCost"></span></td>
+        </tr>
+        <tr>
+          <th>HDD (GB)</th>
+          <td class="price" id="hddPrice">0.1</td>
+          <td class="amount">
+            <button class="control-btn" onclick="adjustAmount('hdd', -1)">-</button>
+            <input type="number" id="hddAmount" min="0" max="2000" placeholder="Amount" />
+            <button class="control-btn" onclick="adjustAmount('hdd', 1)">+</button>
+          </td>
+          <td><span id="hddCost"></span></td>
+        </tr>
+        <tr>
+          <th>SSD (GB)</th>
+          <td class="price" id="ssdPrice">0.2</td>
+          <td class="amount">
+            <button class="control-btn" onclick="adjustAmount('ssd', -1)">-</button>
+            <input type="number" id="ssdAmount" min="0" max="1000" placeholder="Amount" />
+            <button class="control-btn" onclick="adjustAmount('ssd', 1)">+</button>
+          </td>
+          <td><span id="ssdCost"></span></td>
+        </tr>
+        <tr>
+          <th>IP Address</th>
+          <td class="price" id="ipPrice">2</td>
+          <td class="amount">
+            <button class="control-btn" onclick="adjustAmount('ip', -1)">-</button>
+            <input type="number" id="ipAmount" min="0" max="10" placeholder="Amount" />
+            <button class="control-btn" onclick="adjustAmount('ip', 1)">+</button>
+          </td>
+          <td><span id="ipCost"></span></td>
+        </tr>
+        <tr>
+          <th>TOTAL</th>
+          <td></td>
+          <td></td>
+          <td><span id="totalCost"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="button-info">
+      <i>*Cenas norādītas bez PVN</i>
+      <button class="button" onclick="resetToDefault()"><i class="fas fa-sync"></i></button>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+<script>
+function calculateCost(item) {
+  const amountInput = document.getElementById(`${item}Amount`);
+  const costSpan = document.getElementById(`${item}Cost`);
+  const priceCell = document.getElementById(`${item}Price`);
+
+if (amountInput && costSpan && priceCell) {
+    const amountValue = amountInput.value.trim() === '' ? 0 : parseFloat(amountInput.value);
+    const defaultValue = parseFloat(amountInput.getAttribute('data-default')) || 0;
+    const validAmount = Math.min(parseFloat(amountInput.max), Math.max(defaultValue, amountValue));
+
+    const parsedPrice = parseFloat(priceCell.textContent);
+
+    const price = isNaN(parsedPrice) ? 0 : parsedPrice * validAmount;
+
+    amountInput.value = validAmount;
+
+    if (amountValue < defaultValue) {
+      amountInput.style.color = 'red';
+    } else {
+      if ((item === 'hdd' || item === 'ssd') && amountValue > 0 && amountValue < 20) {
+        amountInput.style.color = 'red';
+      } else {
+        amountInput.style.color = '';
+      }
+    }
+
+    costSpan.textContent = isNaN(price) ? '' : price.toFixed(2);
+
+    calculateAllCosts();
+  }
+}
+  
+function setDefaultValues() {
+  const defaultValues = {
+    cpu: "",
+    ram: "",
+    hdd: "",
+    ssd: "",
+    ip: "",
+  };
+
+  Object.keys(defaultValues).forEach((key) => {
+    const input = document.getElementById(`${key}Amount`);
+    if (input) {
+      const defaultValue = defaultValues[key];
+      input.value = defaultValue;
+      input.setAttribute('data-default', defaultValue);
+      calculateCost(key);
+    }
+  });
+
+  calculateAllCosts();
+}
+
+  
+function resetToDefault() {
+  setDefaultValues();
+}
+
+function adjustAmount(item, change) {
+  const amountInput = document.getElementById(`${item}Amount`);
+  if (amountInput) {
+    const currentAmount = parseInt(amountInput.value, 10) || 0;
+    const minAmount = parseInt(amountInput.min, 10) || 0;
+    const maxAmount = parseInt(amountInput.max, 10) || Infinity;
+    const newAmount = Math.min(maxAmount, Math.max(minAmount, currentAmount + change));
+    amountInput.value = Math.max(newAmount, 0);
+    
+    calculateCost(item);
+  }
+}
+  
+function calculateAllCosts() {
+  const cpuCost = parseFloat(document.getElementById('cpuCost').textContent) || 0;
+  const ramCost = parseFloat(document.getElementById('ramCost').textContent) || 0;
+  const hddCost = parseFloat(document.getElementById('hddCost').textContent) || 0;
+  const ssdCost = parseFloat(document.getElementById('ssdCost').textContent) || 0;
+  const ipCost = parseFloat(document.getElementById('ipCost').textContent) || 0;
+
+  const totalCost = cpuCost + ramCost + hddCost + ssdCost + ipCost;
+
+  document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+}
+  
+  document.getElementById('cpuAmount').addEventListener('input', () => calculateCost('cpu'));
+  document.getElementById('ramAmount').addEventListener('input', () => calculateCost('ram'));
+  document.getElementById('hddAmount').addEventListener('input', () => calculateCost('hdd'));
+  document.getElementById('ssdAmount').addEventListener('input', () => calculateCost('ssd'));
+  document.getElementById('ipAmount').addEventListener('input', () => calculateCost('ip'));
+
+  setDefaultValues();
+</script>
+</body>
+</html>
