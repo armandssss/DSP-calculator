@@ -161,14 +161,51 @@
     width: 70%;
     color: red;
   }
+
   .invalid-input {
     color: red;
   }
+
+  .ip-row {
+    box-shadow: 5px 0px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (max-width: 768px) {
+
+      body, input {
+        font-size: 18px;
+      }
+
+      .styled-table th,
+      .styled-table td {
+        padding: 10px 15px;
+      }
+
+      .button {
+        width: 70px;
+        height: 70px;
+        font-size: large;
+      }
+
+      .container {
+        max-width: 100%;
+        min-height: 100%;
+        margin-top:0px;
+        padding:7px;
+        background-color:transparent;
+        box-shadow: none;
+      }
+
+      h1{
+        font-size: 40px;
+        margin-bottom:5px;
+      }
+    }
 </style>
 <body>
 <div class="wrapper">
   <div class="container">
-    <h1>Calculator</h1>
+    <h1>CALCULATOR</h1>
     <table class="styled-table" id="costTable">
       <thead>
         <tr>
@@ -219,7 +256,7 @@
           </td>
           <td><span id="ssdCost"></span></td>
         </tr>
-        <tr>
+        <tr class="ip-row">
           <th>IP Address</th>
           <td class="price" id="ipPrice">2</td>
           <td class="amount">
