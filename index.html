@@ -94,8 +94,7 @@
   </div>
   <div class="form-container">
     <h1>ORDER</h1>
-    <div class="input-container">
-      <form id="input-container" method="post" action="process_form.php">
+      <form class="input-container" id="input-container" method="post" action="process_form.php">
         <input type="text" placeholder="Email" name="email" id="email" autocomplete="email">
         <input type="text" placeholder="First Name" name="first" id="first" autocomplete="name">
         <input type="text" placeholder="Last Name" name="last" id="last" autocomplete="family-name">
@@ -103,7 +102,6 @@
         <div class="g-recaptcha" data-sitekey="6Lfncl4pAAAAAGkVprRaPFOQ71lM6rBFl51yKh-m" data-callback='onSubmit' data-action='submit'></div>
         <button type="submit">Submit</button>
       </form>
-    </div>
   </div>
 <script>
   function onSubmit(token) {
