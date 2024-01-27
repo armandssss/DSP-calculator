@@ -26,12 +26,14 @@ body {
   }
 
   .submit {
+    font-family: Candara;
     border: 2px solid #009879;
     background-color: #009879;
     color: white;
     padding: 10px 20px;
     font-size: 24px;
     cursor: pointer;
+    width:30%;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -82,8 +84,10 @@ body {
   .input-container{
     display:flex;
     flex-direction: column;
+    align-items: center;
     gap:40px;
     width: 100%;
+    margin-top:80px; 
   }
 
   .input {
@@ -102,6 +106,8 @@ body {
     border-bottom: .2em solid #009879;
     background: rgba(#009879, .2);
     padding: .4em;
+    border-radius:5px;
+    width:70%;
   }
 
   input::-webkit-outer-spin-button,
@@ -139,7 +145,7 @@ body {
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     padding: 20px;
     justify-content: flex-start;
   }
