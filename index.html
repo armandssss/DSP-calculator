@@ -123,15 +123,6 @@ if (amountInput && costSpan && priceCell) {
 
     amountInput.value = validAmount;
 
-    if (amountValue < defaultValue) {
-      amountInput.style.color = 'red';
-    } else {
-      if ((item === 'hdd' || item === 'ssd') && amountValue > 0 && amountValue < 20) {
-        amountInput.style.color = 'red';
-      } else {
-        amountInput.style.color = '';
-      }
-    }
 
     costSpan.textContent = isNaN(price) ? '' : price.toFixed(2);
 
@@ -141,11 +132,11 @@ if (amountInput && costSpan && priceCell) {
   
 function setDefaultValues() {
   const defaultValues = {
-    cpu: "",
-    ram: "",
-    hdd: "",
-    ssd: "",
-    ip: "",
+    cpu: 1,
+    ram: 1,
+    hdd: 20,
+    ssd: 0,
+    ip: 1,
   };
 
   Object.keys(defaultValues).forEach((key) => {
